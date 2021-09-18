@@ -19,6 +19,8 @@ import { SharedModule } from './modules/shared.module';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { JwtTokenInterceptor } from './interceptors/jwt-token.interceptor';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { LoadingInterceptor } from './interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     MemberDetailsComponent,
     ListsComponent,
     MessagesComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberEditComponent
   ],
   imports: [
     FormsModule,
@@ -38,11 +41,11 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    NgxGalleryModule,
     SharedModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtTokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
