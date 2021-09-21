@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    console.log(this.registerForm.value);
     this.accountService.register(this.registerForm.value).subscribe(response => {
       this.router.navigateByUrl('/members');
     }, error => {
@@ -60,7 +59,6 @@ export class RegisterComponent implements OnInit {
   }
 
   cancel() {
-    console.log("cancelled");
     this.cancelRegister.emit(false);
   }
 }

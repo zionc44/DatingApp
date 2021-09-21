@@ -25,7 +25,8 @@ export class PhotoEditorComponent implements OnInit {
     private accountService: AccountService) {
     this.currentUser = {
       username: "",
-      token: ""
+      token: "",
+      gender: ""
     }
 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {

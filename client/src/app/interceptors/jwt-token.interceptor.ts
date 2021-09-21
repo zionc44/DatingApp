@@ -17,7 +17,8 @@ export class JwtTokenInterceptor implements HttpInterceptor {
   constructor(private accountService: AccountService) {
     this.currentUser = {
       username: "",
-      token: ""
+      token: "",
+      gender:""
     }
 
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => {
@@ -29,7 +30,6 @@ export class JwtTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
-    console.log("currentUser====>", this.currentUser);
     request = request.clone({
       setHeaders: {
         Authorization: 'Bearer ' + this.currentUser.token

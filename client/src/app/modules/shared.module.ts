@@ -7,28 +7,35 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { FileUploadModule } from 'ng2-file-upload';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { TimeagoModule } from 'ngx-timeago';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    BsDropdownModule.forRoot(),
-    ToastrModule.forRoot({
-      positionClass:"toast-bottom-right"
-    }),
-    TabsModule.forRoot(),
     NgxGalleryModule,
     NgxSpinnerModule,
     FileUploadModule,
-    BsDatepickerModule.forRoot()
+    TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    TimeagoModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    PaginationModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: "toast-bottom-right" }),
   ],
   exports: [
-    BsDropdownModule,
-    ToastrModule,
     TabsModule,
+    ToastrModule,
+    TimeagoModule,
+    ButtonsModule,
+    BsDropdownModule,
     NgxGalleryModule,
     NgxSpinnerModule,
     FileUploadModule,
+    PaginationModule,
     BsDatepickerModule
   ]
 })
