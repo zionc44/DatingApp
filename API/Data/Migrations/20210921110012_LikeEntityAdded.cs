@@ -10,12 +10,12 @@ namespace API.Data.Migrations
                 name: "Likes",
                 columns: table => new
                 {
-                    SourceUSerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SourceUserId = table.Column<int>(type: "INTEGER", nullable: false),
                     LikedUserId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Likes", x => new { x.SourceUSerId, x.LikedUserId });
+                    table.PrimaryKey("PK_Likes", x => new { x.SourceUserId, x.LikedUserId });
                     table.ForeignKey(
                         name: "FK_Likes_Users_LikedUserId",
                         column: x => x.LikedUserId,
@@ -23,8 +23,8 @@ namespace API.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Likes_Users_SourceUSerId",
-                        column: x => x.SourceUSerId,
+                        name: "FK_Likes_Users_SourceUserId",
+                        column: x => x.SourceUserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
