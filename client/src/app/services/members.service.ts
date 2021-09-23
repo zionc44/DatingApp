@@ -17,8 +17,14 @@ export class MembersService {
 
   getMembers(userParams: UserParams): Observable<PaginatedResult<Member[]>> {
     let params = this.getPaginationHeraders(userParams);
+    params = params.append('orderBy', userParams.orderBy.toString());
+    params = params.append('minAge', userParams.minAge.toString());
+    params = params.append('maxAge', userParams.maxAge.toString());
+    params = params.append('gender', userParams.gender.toString());
     return this.getPaginatedResult<Member[]>(this.baseUrl + 'users',params);
   }
+
+
 
   private getPaginatedResult<T>(url:string, params: HttpParams) {
     const paginatedResult: PaginatedResult<T> = new PaginatedResult<T>();
@@ -41,10 +47,6 @@ export class MembersService {
 
     params = params.append('pageNumber', userParams.pageNumber.toString());
     params = params.append('pageSize', userParams.pageSize.toString());
-    params = params.append('orderBy', userParams.orderBy.toString());
-    params = params.append('minAge', userParams.minAge.toString());
-    params = params.append('maxAge', userParams.maxAge.toString());
-    params = params.append('gender', userParams.gender.toString());
 
     return params;
   }
@@ -70,6 +72,17 @@ export class MembersService {
 
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId);
+  }
+
+  addLike(username:string) {
+    return this.http.post(this.baseUrl + 'likes/'+ username, {})
+  }
+
+  getLikes(userParams: UserParams) {
+    let params = this.getPaginationHeraders(userParams);
+    params = params.append('predicate', userParams.predicate);
+    return this.getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes',params);
+    // return this.http.get<Partial<Member[]>>(this.baseUrl + 'likes?predicate=' + predicate);
   }
 }
 
