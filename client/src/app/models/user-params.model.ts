@@ -8,6 +8,7 @@ export class UserParams {
     public pageSize: number = 5;
     public pageNumber: number = 1;
     public predicate: string = "liked";
+    public container: string = "Unread";
 
     constructor(public user: User) {
         this.gender = user.gender === "female" ? "male" : "female";

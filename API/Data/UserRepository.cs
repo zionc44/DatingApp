@@ -35,7 +35,7 @@ namespace API.Data
         {
             var query = this.context.Users.AsQueryable();
 
-            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            //query = query.Where(u => u.UserName != userParams.CurrentUsername);
             query = query.Where(u => u.Gender == userParams.Gender);
 
             var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
