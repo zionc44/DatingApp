@@ -25,6 +25,11 @@ namespace API
             try
             {
                 var context = services.GetRequiredService<DataContext>();
+
+                var connections = context.Connections.ToList();
+                context.Connections.RemoveRange(connections);
+                await context.SaveChangesAsync();
+
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
                 var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                 await context.Database.MigrateAsync();

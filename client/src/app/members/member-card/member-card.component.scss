@@ -33,3 +33,13 @@
 .animate {
     transition: all 300ms ease-in-out;
 }
+
+@keyframes fa-blink {
+    0% {opacity: 1;}
+    100% {opacity: 0.2;}
+}
+
+.is-online{
+    animation: fa-blink 500ms linear infinite;
+    color: #01bd2a;
+}

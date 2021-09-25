@@ -22,6 +22,11 @@ namespace API.Data
             this.mapper = mapper;
         }
 
+        public void AddGroup(Group group)
+        {
+            this.context.Groups.Add(group);
+        }
+
         public void AddMessage(Message message)
         {
             this.context.Messages.Add(message);
@@ -32,12 +37,32 @@ namespace API.Data
             this.context.Messages.Remove(message);
         }
 
+        public async Task<Connection> GetConnection(string connectionId)
+        {
+            return await this.context.Connections.FindAsync(connectionId);
+        }
+
+        public async Task<Group> GetGroupForConnection(string connectionId)
+        {
+            return await this.context.Groups
+                .Include(c => c.Connections)
+                .Where(c => c.Connections.Any(x => x.ConnectionId == connectionId))
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<Message> GetMessage(int id)
         {
             return await this.context.Messages
                 .Include(u => u.Sender)
                 .Include(u => u.Recipient)
                 .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Group> GetMessageGroup(string groupName)
+        {
+            return await this.context.Groups
+                .Include(x => x.Connections)
+                .FirstOrDefaultAsync(x => x.name == groupName);
         }
 
         public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
@@ -76,13 +101,18 @@ namespace API.Data
             {
                 foreach (var message in unreadMessage)
                 {
-                    message.DateRead = DateTime.Now;
+                    message.DateRead = DateTime.UtcNow;
                 }
 
                 await context.SaveChangesAsync();
             }
 
             return this.mapper.Map<IEnumerable<MessageDto>>(messages);
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            this.context.Connections.Remove(connection);
         }
 
         public async Task<bool> SaveAllAsync()
