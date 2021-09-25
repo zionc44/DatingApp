@@ -10,6 +10,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { TimeagoModule } from 'ngx-timeago';
     NgxSpinnerModule,
     FileUploadModule,
     TabsModule.forRoot(),
+    ModalModule.forRoot(),
     ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -28,6 +30,7 @@ import { TimeagoModule } from 'ngx-timeago';
   ],
   exports: [
     TabsModule,
+    ModalModule,
     ToastrModule,
     TimeagoModule,
     ButtonsModule,
